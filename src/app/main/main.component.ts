@@ -1,80 +1,58 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
-import { WeatherDataService } from '../services/weather-data.service';
-import { Observable, Subscription } from 'rxjs';
+
+import {
+  MatDialog,
+  MAT_DIALOG_DATA,
+  MatDialogRef,
+  MatDialogModule,
+} from '@angular/material/dialog';
+import { CustomDialogComponent } from '../shared/custom-dialog/custom-dialog.component';
+
+export interface Article {
+  title: string;
+  body: string;
+}
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
-  styleUrls: ['./main.component.css']
+  styleUrls: ['./main.component.css'],
 })
 export class MainComponent implements OnInit, OnDestroy {
-  
+  data: Array<Article> = [
+    {
+      title: 'The Rise of AI in Everyday Life',
+      body: 'Artificial intelligence is transforming the way we live, work, and communicate. From virtual assistants to self-driving cars, AI is becoming an integral part of our daily routines.',
+    },
+    {
+      title: '10 Tips for Healthy Living',
+      body: 'A balanced diet, regular exercise, and adequate sleep are essential for maintaining a healthy lifestyle. This article explores practical tips to help you achieve overall wellness.',
+    },
+    {
+      title: "Exploring the Cosmos: A Beginner's Guide",
+      body: 'The universe is vast and full of wonders. This guide introduces the basics of astronomy, from stargazing techniques to understanding constellations and celestial events.',
+    },
+  ];
 
-  private weatherData = inject(WeatherDataService);
-  private weatherData$:Subscription | undefined
-
-  suggestedCity: any[] = [];
-  searchText: string = "";
-  data: any;
-  currentDate: Date = new Date();
-  isLoading: boolean = true;
-
-
-  ngOnInit(): void {
-    this.getData('Varanasi');
-  }
+  constructor(public dialog: MatDialog) {}
 
   ngOnDestroy(): void {
-    this.weatherData$?.unsubscribe( );
+    throw new Error('Method not implemented.');
+  }
+  ngOnInit(): void {
+    throw new Error('Method not implemented.');
   }
 
-  Search() {
-    this.isLoading = true;
-    this.getData(this.searchText);
+  openDialog(): void {
+    const dialogRef = this.dialog.open(CustomDialogComponent, {
+      data: { name: 'shruti', animal: 'dog' },
+      height: '400px',
+      width: '600px',
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed');
+    });
   }
-
-
-
-  getData(cityName: string) {
-    this.weatherData$= this.weatherData.getGeoLocation(cityName)
-      .subscribe((res) => {
-        this.suggestedCity = res;
-
-        if (res.length > 0) {
-          const lat = this.suggestedCity[0].lat;
-          const long = this.suggestedCity[0].lon;
-          this.weatherData.getWeatherData(lat, long).subscribe((res) => {
-          this.data = res;
-          this.isLoading = false;
-
-          });
-        }
-        else {
-          let spinner = document.getElementById("spinner-container");
-          (spinner as HTMLElement).innerText = "No city found";
-        }
-
-      })
-
-  }
-
-  getImageUrl() {
-    if (this.data?.weather[0]?.main == 'Clouds') {
-      return '../../assets/images/sky.png';
-    }
-    else if (this.data?.weather[0]?.main == 'Rain') {
-      return './../assets/images/rain-svgrepo-com.svg'
-    }
-    else if (this.data?.weather[0]?.main == 'Mist') {
-      return '../../assets/images/mist.png'
-    }
-    else {
-      return '../../assets/images/sun-xxl.png'
-    }
-  }
-
-
-
-
 }
