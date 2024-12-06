@@ -5,25 +5,28 @@
     >
   </div>
 
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">#S.No.</th>
-        <th scope="col">Title</th>
-        <th scope="col">Body</th>
-        <th scope="col">Edit</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of data; let i=index">
-        <th scope="row">{{i+1}}</th>
-        <td>{{item.title}}</td>
-        <td>{{item.body}}</td>
-        <td><i class="fas fa-edit"></i></td>
-      </tr>
-     
-      
-    </tbody>
-  </table>
+ 
+</div>
+<div class="container">
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#S.No.</th>
+            <th scope="col">Title</th>
+            <th scope="col">Body</th>
+            <th scope="col">Edit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of data; let i=index">
+            <th scope="row">{{i+1}}</th>
+            <td>{{item.title}}</td>
+            <td>{{item.body}}</td>
+            <td><i class="fas fa-edit"></i></td>
+          </tr>
+         
+          
+        </tbody>
+      </table>
 </div>
 

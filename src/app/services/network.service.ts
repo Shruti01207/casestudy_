@@ -1,11 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Article } from '../main/main.component';
 
 @Injectable({
   providedIn: 'root'
 })
-export class WeatherDataService {
+export class NetworkService {
 
   constructor() { }
 
@@ -13,8 +14,12 @@ export class WeatherDataService {
   private apiKey='6c7a39bdcb10bef0e3963df5bf15df77'
   
 
-  getArticles(cityName:any):Observable<string[]>{
-    return this.http.get('http://localhost:3000/articles');
+  getArticles( ):Observable<Article[]>{
+    return this.http.get('http://localhost:3000/articles') as Observable<Article[]>;
+  }
+
+  addArticles(article:Article):Observable<Article[]>{
+    return this.http.post('http://localhost:3000/articles',article) as Observable<Article[]>;
   }
 
  

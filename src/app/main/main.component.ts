@@ -8,6 +8,7 @@ import {
   MatDialogModule,
 } from '@angular/material/dialog';
 import { CustomDialogComponent } from '../shared/custom-dialog/custom-dialog.component';
+import { NetworkService } from '../services/network.service';
 
 export interface Article {
   title: string;
@@ -35,13 +36,21 @@ export class MainComponent implements OnInit, OnDestroy {
     },
   ];
 
-  constructor(public dialog: MatDialog) {}
+  constructor(
+    public dialog: MatDialog,
+    public networkService: NetworkService
+  ) {}
 
   ngOnDestroy(): void {
     throw new Error('Method not implemented.');
   }
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    this.networkService.getArticles().subscribe({
+      next: (res) => {
+        console.log(res);
+        this.data=res;
+      },
+    });
   }
 
   openDialog(): void {
