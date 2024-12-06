@@ -45,10 +45,18 @@ export class MainComponent implements OnInit, OnDestroy {
     throw new Error('Method not implemented.');
   }
   ngOnInit(): void {
+    this.networkService.isAdded.subscribe({
+      next: (res) => {
+        this.getData();
+      },
+    });
+  }
+
+  getData() {
     this.networkService.getArticles().subscribe({
       next: (res) => {
         console.log(res);
-        this.data=res;
+        this.data = res;
       },
     });
   }
