@@ -1,4 +1,5 @@
-<form class="p-4" [formGroup]="myForm" (ngSubmit)="addArticle( )">
+
+<form class="p-4" [formGroup]="myForm" (ngSubmit)="action()">
   <div class="form-group">
     <label for="article-title">Article Title</label>
     <input
@@ -13,8 +14,9 @@
     <textarea id="body" name="body" rows="6" formControlName="body" cols="68">At w3schools.com you will learn how to make a website. They offer free tutorials in all web development technologies.</textarea> 
   </div>
   <div class="d-flex">
-    <button type="submit" class="btn btn-primary mt-4 me-3">Add</button>
-    <button  class="btn btn-danger mt-4 me-3"(click)="close()">Close</button>
+        <button type="submit" class="btn btn-primary mt-4 me-3" [class.btn-success]="flag==false">{{(flag==true)?'Add':'Edit'}}</button>
+   
+    <button type="button"  class="btn btn-danger mt-4 me-3" (click)="close()">Close</button>
   </div>
   
 </form>

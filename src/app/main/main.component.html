@@ -1,8 +1,6 @@
 <div class="container mt-4">
   <div class="text-end">
-    <span class="btn btn-outline-primary" (click)="openDialog()"
-      >Add Article</span
-    >
+    <span class="btn btn-outline-primary" (click)="openDialog('add','fsd')">Add Article</span>
   </div>
 
 </div>
@@ -21,7 +19,7 @@
             <th scope="row">{{i+1}}</th>
             <td>{{item.title}}</td>
             <td>{{item.body}}</td>
-            <td><i class="fas fa-edit"></i></td>
+            <td><i class="fas fa-edit" style="color:green" (click)="openDialog('edit',item.id)"></i></td>
           </tr>
          
           

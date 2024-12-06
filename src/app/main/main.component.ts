@@ -11,6 +11,7 @@ import { CustomDialogComponent } from '../shared/custom-dialog/custom-dialog.com
 import { NetworkService } from '../services/network.service';
 
 export interface Article {
+  id:string
   title: string;
   body: string;
 }
@@ -21,21 +22,7 @@ export interface Article {
   styleUrls: ['./main.component.css'],
 })
 export class MainComponent implements OnInit, OnDestroy {
-  data: Array<Article> = [
-    {
-      title: 'The Rise of AI in Everyday Life',
-      body: 'Artificial intelligence is transforming the way we live, work, and communicate. From virtual assistants to self-driving cars, AI is becoming an integral part of our daily routines.',
-    },
-    {
-      title: '10 Tips for Healthy Living',
-      body: 'A balanced diet, regular exercise, and adequate sleep are essential for maintaining a healthy lifestyle. This article explores practical tips to help you achieve overall wellness.',
-    },
-    {
-      title: "Exploring the Cosmos: A Beginner's Guide",
-      body: 'The universe is vast and full of wonders. This guide introduces the basics of astronomy, from stargazing techniques to understanding constellations and celestial events.',
-    },
-  ];
-
+  data: Array<Article> = [];
   constructor(
     public dialog: MatDialog,
     public networkService: NetworkService
@@ -61,9 +48,15 @@ export class MainComponent implements OnInit, OnDestroy {
     });
   }
 
-  openDialog(): void {
+  openDialog(type:string,id?:string): void {
+
+    this.networkService.formType.next(type);
+    if(type=='edit'){
+      this.networkService.articleId=id;
+    }
+
     const dialogRef = this.dialog.open(CustomDialogComponent, {
-      data: { name: 'shruti', animal: 'dog' },
+      data: {formType: type},
       height: '400px',
       width: '600px',
     });

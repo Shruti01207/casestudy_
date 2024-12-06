@@ -1,16 +1,15 @@
 {
   "articles": [
     {
+      "id": "fdf",
       "title": "The Rise of AI in Everyday Life",
       "body": "Artificial intelligence is transforming the way we live, work, and communicate. From virtual assistants to self-driving cars, AI is becoming an integral part of our daily routines."
     },
     {
-      "title": "10 Tips for Healthy Living",
+      "id": "hjs",
+      "title": "5 Tips for Healthy Living",
       "body": "A balanced diet, regular exercise, and adequate sleep are essential for maintaining a healthy lifestyle. This article explores practical tips to help you achieve overall wellness."
-    },
-    {
-      "title": "Exploring the Cosmos: A Beginner's Guide",
-      "body": "The universe is vast and full of wonders. This guide introduces the basics of astronomy, from stargazing techniques to understanding constellations and celestial events."
     }
+    
   ]
 }
